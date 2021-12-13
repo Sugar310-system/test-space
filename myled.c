@@ -24,7 +24,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	if(copy_from_user(&c,buf,sizeof(char)))
 		return -EFAULT;
 	
-	if(c == '0'){
+	if(c == 'off'){
 		led_chika_flag=0;//ALL OFF
 		gpio_base[10] = 1 << l;
 		gpio_base[10] = 1 << l2;
@@ -33,7 +33,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 		gpio_base[10] = 1 << l5;
 		gpio_base[10] = 1 << l6;
 	}
-	else if(c == '1'){
+	else if(c == 'all'){
 		led_chika_flag=0;//ALL ON
 		gpio_base[7] = 1 << l;
 		gpio_base[7] = 1 << l2;
@@ -42,7 +42,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 		gpio_base[7] = 1 << l5;
 		gpio_base[7] = 1 << l6;
 	}
-	else if(c == '2'){
+	else if(c == 'hotaru'){
 		for(k=0;k<5;k++)//HOTARU
 		{
 			gpio_base[7] = 1 << l;
@@ -71,7 +71,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 			__delay(10000000);
 		}
 	}
-	else if(c == '3'){
+	else if(c == 'pato'){
 		for(k=0;k<10;k++)//PATO_LAMP
 		{
 			gpio_base[7] = 1 << l;
