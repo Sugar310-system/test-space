@@ -23,12 +23,12 @@ static volatile u32 *gpio_base = NULL;
 static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_t* pos)
 {
         char c;
-        int led_chika_flag=0;
+        int led_drive=0;
         if(copy_from_user(&c,buf,sizeof(char)))
                 return -EFAULT;
 
         if(c == '0'){
-                led_chika_flag=0;//ALL OFF
+                led_drive=0;//ALL OFF
                 gpio_base[10] = 1 << l;
                 gpio_base[10] = 1 << l2;
                 gpio_base[10] = 1 << l3;
@@ -37,7 +37,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
                 gpio_base[10] = 1 << l6;
         }
         else if(c == '1'){
-                led_chika_flag=0;//ALL ON
+                led_drive=0;//ALL ON
                 gpio_base[7] = 1 << l;
                 gpio_base[7] = 1 << l2;
                 gpio_base[7] = 1 << l3;
