@@ -46,11 +46,29 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 		for(k=0;k<5;k++)
 		{
 			gpio_base[7] = 1 << l;
+			__delay(10000000);
 			gpio_base[7] = 1 << l2;
-			__delay(100000);
+			__delay(10000000)
+			gpio_base[7] = 1 << l3;
+			__delay(10000000);
+			gpio_base[7] = 1 << l4;
+			__delay(10000000);
+			gpio_base[7] = 1 << l5;
+			__delay(10000000)
+			gpio_base[7] = 1 << l6;
+			__delay(10000000);
 			gpio_base[10] = 1 << l;
+			__delay(10000000);
 			gpio_base[10] = 1 << l2;
-			__delay(100000);
+			__delay(10000000)
+			gpio_base[10] = 1 << l3;
+			__delay(10000000);
+			gpio_base[10] = 1 << l4;
+			__delay(10000000);
+			gpio_base[10] = 1 << l5;
+			__delay(10000000)
+			gpio_base[10] = 1 << l6;
+			__delay(10000000);
 		}
 	}
 	else if(c == '3'){
