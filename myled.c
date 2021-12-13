@@ -11,7 +11,7 @@ MODULE_DESCRIPTION("driver for LED contorl");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("0.0.1");
 
-static int i=24,i2=26,k;
+static int l=25,l2=24,l3=23,l4=22,l5=21,l6=20,k;
 static dev_t dev;
 static struct cdev cdv;
 static struct class *cls = NULL;
@@ -25,24 +25,32 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 		return -EFAULT;
 	
 	if(c == '0'){
-		led_chika_flag=0;
-		gpio_base[10] = 1 << i;
-		gpio_base[10] = 1 << i2;
+		led_chika_flag=0;//ALL OFF
+		gpio_base[10] = 1 << l;
+		gpio_base[10] = 1 << l2;
+		gpio_base[10] = 1 << l3;
+		gpio_base[10] = 1 << l4;
+		gpio_base[10] = 1 << l5;
+		gpio_base[10] = 1 << l6;
 	}
 	else if(c == '1'){
-		led_chika_flag=0;
-		gpio_base[7] = 1 << i;
-		gpio_base[7] = 1 << i2;
+		led_chika_flag=0;//ALL ON
+		gpio_base[7] = 1 << l;
+		gpio_base[7] = 1 << l2;
+		gpio_base[7] = 1 << l3;
+		gpio_base[7] = 1 << l4;
+		gpio_base[7] = 1 << l5;
+		gpio_base[7] = 1 << l6;
 	}
 	else if(c == '2'){
 		for(k=0;k<5;k++)
 		{
-			gpio_base[7] = 1 << i;
-			gpio_base[7] = 1 << i2;
-			__delay(10*1000*1000);
-			gpio_base[10] = 1 << i;
-			gpio_base[10] = 1 << i2;
-			__delay(10*1000*1000);
+			gpio_base[7] = 1 << l;
+			gpio_base[7] = 1 << l2;
+			__delay(100000);
+			gpio_base[10] = 1 << l;
+			gpio_base[10] = 1 << l2;
+			__delay(100000);
 		}
 	}
 	else if(c == '3'){
@@ -71,14 +79,27 @@ static int __init init_mod(void)
 	int retval;
 
 	gpio_base = ioremap_nocache(0xfe200000, 0xA0);
-	const u32 led1 = i;
+	const u32 led1 = l;//LED1
 	const u32 index1 = led1/10;
 	const u32 shift1 = (led1%10)*3;
-	const u32 led2 = i2;
+	const u32 led2 = l2;//LED2
 	const u32 index2 = led2/10;
 	const u32 shift2 = (led2%10)*3;
-	const u32 mask2 = ~(0x7 << shift1|0x7<<shift2);
-	gpio_base[index1] = (gpio_base[index1] & mask2) | (0x1 << shift1)|(0x01<<shift2);
+	const u32 led3 = l3;//LED3
+	const u32 index3 = led3/10;
+	const u32 shift3 = (led3%10)*3;
+	const u32 led4 = l4;//LED4
+	const u32 index4 = led4/10;
+	const u32 shift4 = (led4%10)*3;
+	const u32 led5 = l5;//LED5
+	const u32 index5 = led5/10;
+	const u32 shift5 = (led5%10)*3;
+	const u32 led6 = l6;//LED6
+	const u32 index6 = led6/10;
+	const u32 shift6 = (led6%10)*3;
+	
+	const u32 mask2 = ~(0x7 << shift1|0x7<<shift2|0x7<<shift3|0x7<<shift4|0x7<<shift5|0x7<<shift6);
+	gpio_base[index1] = (gpio_base[index1] & mask2) | (0x1 << shift1)|(0x01<<shift2)|(0x01<<shift3)|(0x01<<shift4)|(0x01<<shift5)|(0x01<<shift6);
 	retval = alloc_chrdev_region(&dev, 0, 1, "myled");
 	if(retval < 0){
 		printk(KERN_ERR "alloc_chrdev_region failed.\n");
