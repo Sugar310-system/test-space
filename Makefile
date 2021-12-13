@@ -1,6 +1,6 @@
-obj-m := leddrv.o
+obj-m := myled.o
 
-leddrv.ko: leddrv.c
+myled.ko: myled.c
 	make -C /usr/src/linux-headers-`uname -r` M=`pwd` V=1 modules
 
 clean:
