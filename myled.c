@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0
+// Copyright (C) 2021 Sugar310-system and Ryuichi Ueda.
+
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
@@ -6,7 +9,7 @@
 #include <linux/io.h>
 #include <linux/delay.h>
 
-MODULE_AUTHOR("usuisyun and Ryuichi Ueda");
+MODULE_AUTHOR("Ryuichi Ueda and Sugar310-system");
 MODULE_DESCRIPTION("driver for LED contorl");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("0.0.1");
