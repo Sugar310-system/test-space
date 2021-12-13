@@ -43,7 +43,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 		gpio_base[7] = 1 << l6;
 	}
 	else if(c == '2'){
-		for(k=0;k<5;k++)
+		for(k=0;k<5;k++)//HOTARU
 		{
 			gpio_base[7] = 1 << l;
 			__delay(10000000);
@@ -72,15 +72,30 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 		}
 	}
 	else if(c == '3'){
-		for(k=0;k<5;k++)
+		for(k=0;k<5;k++)//PATO_LAMP
 		{
-			gpio_base[10] = 1 << l;
-			gpio_base[7] = 1 << l2;
-			__delay(10*1000*1000);
 			gpio_base[7] = 1 << l;
-			gpio_base[10] = 1 << l2;
-			__delay(10*1000*1000);
+			__delay(10000000);
 			gpio_base[10] = 1 << l;
+			__delay(10000000);
+			gpio_base[7] = 1 << l2;
+			__delay(10000000);
+			gpio_base[10] = 1 << l2;
+			__delay(10000000);
+			gpio_base[7] = 1 << l3;
+			__delay(10000000);
+			gpio_base[10] = 1 << l3;
+			__delay(10000000);
+			gpio_base[7] = 1 << l4;
+			__delay(10000000);
+			gpio_base[10] = 1 << l4;
+			gpio_base[7] = 1 << l5;
+			__delay(10000000);
+			gpio_base[10] = 1 << l5;
+			__delay(10000000);
+			gpio_base[7] = 1 << l6;
+			__delay(10000000);
+			gpio_base[10] = 1 << l6;
 		}
 	}
 
